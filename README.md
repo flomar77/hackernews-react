@@ -1,4 +1,4 @@
-# Starterkit for Static App 
+# Hacker News - Clone
 ## Using NPM, Gulp, Babel, Rollup, Browsersync, React, SASS
 Run:  
 `npm install` to install your modules  
