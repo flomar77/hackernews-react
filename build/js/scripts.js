@@ -2067,24 +2067,31 @@
 	  const id = props.id;
 	  const url = vars.hnewsAPI + 'item/' + id + '.json';
 	  let [loading, setLoading] = react.useState(true);
-	  let [item, setItem] = react.useState({});
+	  let [story, setStory] = react.useState({});
 	  react.useEffect(() => {
 	    const fetchData = async () => {
-	      axios$1.get(url).then(result => setItem(result.data)).then(setLoading(false)).catch(err => {
+	      axios$1.get(url).then(result => {
+	        localStorage.setItem(id, JSON.stringify(result.data));
+	        setStory(result.data);
+	      }).then(setLoading(false)).catch(err => {
 	        console.log(err);
 	        setLoading(false);
 	      });
 	    };
 
-	    fetchData();
+	    if (localStorage.getItem(id) !== null && localStorage.getItem(id).length > 0) {
+	      setStory(JSON.parse(localStorage.getItem(id)));
+	    } else {
+	      fetchData();
+	    }
 	  }, []);
 	  return react.createElement("div", {
 	    className: "story-content"
 	  }, react.createElement("span", {
 	    className: "story-id"
-	  }, id), react.createElement("h3", null, item.title), react.createElement("p", null, "URL: ", item.url), react.createElement("span", {
+	  }, id), react.createElement("h3", null, story.title), react.createElement("p", null, "URL: ", story.url), react.createElement("span", {
 	    className: "infos"
-	  }, item.score, " by ", item.by));
+	  }, story.score, " by ", story.by));
 	}
 
 	function Stories(props) {
@@ -2093,8 +2100,7 @@
 	  let [loading, setLoading] = react.useState(true);
 	  react.useEffect(() => {
 	    const fetchData = async () => {
-	      axios$1.get(url) // .then(result => setStoriesList(splitArrInChunks(result.data, 20)))
-	      .then(result => setStoriesList(result.data.splice(0, 20))).then(setLoading(false)).catch(err => {
+	      axios$1.get(url).then(result => setStoriesList(result.data.splice(0, 20))).then(setLoading(false)).catch(err => {
 	        console.log(err);
 	        setLoading(false);
 	      });
@@ -2109,7 +2115,9 @@
 	      className: 'story story-' + item
 	    }, react.createElement(Story, {
 	      id: item
-	    }));
+	    }), react.createElement("button", {
+	      onClick: () => props.pageToShow(item)
+	    }, "Read more..."));
 	  }) : () => {
 	    return react.createElement("p", null, "Loading...");
 	  });
@@ -2118,15 +2126,40 @@
 	function Page(props) {
 	  react.useEffect(() => {}, []);
 	  return react.createElement("div", {
-	    className: "page"
-	  });
+	    className: "page",
+	    id: props.id
+	  }, react.createElement("button", {
+	    onClick: () => props.hidePage()
+	  }, "Close"), react.createElement("header", {
+	    className: "page-header"
+	  }, react.createElement(Story, {
+	    id: props.id
+	  })));
 	}
 
 	function App(props) {
+	  let [pageID, setPageID] = react.useState();
+	  let [showPage, setShowPage] = react.useState(false);
 	  react.useEffect(() => {}, []);
+
+	  const getPage = id => {
+	    setPageID(id);
+	    setShowPage(true);
+	  };
+
+	  const hideThePage = () => {
+	    setPageID();
+	    setShowPage(false);
+	  };
+
 	  return react.createElement("div", {
 	    className: "main"
-	  }, react.createElement(MainHeader, null), react.createElement(Stories, null), react.createElement(Page, null));
+	  }, react.createElement(MainHeader, null), react.createElement(Stories, {
+	    pageToShow: getPage
+	  }), showPage ? react.createElement(Page, {
+	    id: pageID,
+	    hidePage: hideThePage
+	  }) : null);
 	}
 
 	reactDom.render(react.createElement(App, null), document.getElementById('root'));

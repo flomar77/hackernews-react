@@ -13,7 +13,6 @@ function Stories(props) {
     React.useEffect(() => {
         const fetchData = async () => {
             axios.get(url)
-            // .then(result => setStoriesList(splitArrInChunks(result.data, 20)))
             .then(result => setStoriesList(result.data.splice(0,20)))
             .then(setLoading(false))
             .catch((err)=> {
@@ -31,7 +30,8 @@ function Stories(props) {
                 ? 
                 storiesList.map((item) => { return( 
                     <article className={'story story-' + item}>
-                        <Story id={item} /> 
+                        <Story id={item} />
+                        <button onClick={(e)=>{ pageShown ? props.pageToShow(item) : e.preventDefault()}}>Read more...</button> 
                     </article>
                 ) }) 
                 : 

@@ -7,27 +7,34 @@ function Story(props) {
     const url = vars.hnewsAPI + 'item/' + id + '.json';
 
     let [ loading, setLoading ] = React.useState(true);
-    let [ item, setItem ] = React.useState({});
+    let [ story, setStory ] = React.useState({});
 
     React.useEffect(() => {
         const fetchData = async () => {
             axios.get(url)
-            .then(result => setItem(result.data))
+            .then(result => {
+                localStorage.setItem(id, JSON.stringify(result.data));
+                setStory(result.data);
+            })
             .then(setLoading(false))
             .catch((err)=> {
-              console.log(err);
-              setLoading(false);
+            console.log(err);
+            setLoading(false);
             });
         };
-        fetchData();
+        if ( localStorage.getItem(id) !== null && localStorage.getItem(id).length > 0 ) {
+            setStory(JSON.parse(localStorage.getItem(id)));
+        } else {
+            fetchData();
+        }
     }, [])
 
     return (
         <div className="story-content">
             <span className="story-id">{id}</span>
-            <h3>{item.title}</h3>
-            <p>URL: {item.url}</p>
-            <span className="infos">{item.score} by {item.by}</span>
+            <h3>{story.title}</h3>
+            <p>URL: {story.url}</p>
+            <span className="infos">{story.score} by {story.by}</span>
         </div>
     )    
 }

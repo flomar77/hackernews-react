@@ -6,14 +6,29 @@ import Page from './page.js';
 
 function App(props) {
 
+    let [ pageID, setPageID ] = React.useState();
+    let [ showPage, setShowPage ] = React.useState(false);
+
     React.useEffect(() => {
     }, []);
+
+    const getPage = (id) => {
+        setPageID(id);
+        setShowPage(true);
+    }
+
+    const hideThePage = () =>{
+        setTimeout(()=>{
+            setPageID();
+            setShowPage(false);
+        }, 800); 
+    }
 
     return (
         <div className="main">
             <MainHeader />
-            <Stories />
-            <Page />
+            <Stories pageToShow={getPage} pageShown={showPage} />
+            { showPage ? <Page id={pageID} hidePage={hideThePage} /> : null }
         </div>
     )    
 }
