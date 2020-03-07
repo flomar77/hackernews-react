@@ -630,12 +630,34 @@
 	vars.location = window.location;
 	vars.url = window.location.href;
 	vars.body = document.querySelector('body');
+	vars.hnewsAPI = 'https://hacker-news.firebaseio.com/v0/';
+
+	function MainHeader(props) {
+	  react.useEffect(() => {}, []);
+	  return react.createElement("header", {
+	    className: "main-header"
+	  }, react.createElement("h1", null, "Hacker News"));
+	}
+
+	function Stories(props) {
+	  react.useEffect(() => {}, []);
+	  return react.createElement("div", {
+	    className: "stories"
+	  });
+	}
+
+	function Page(props) {
+	  react.useEffect(() => {}, []);
+	  return react.createElement("div", {
+	    className: "page"
+	  });
+	}
 
 	function App(props) {
 	  react.useEffect(() => {}, []);
 	  return react.createElement("div", {
 	    className: "main"
-	  }, "test 1");
+	  }, react.createElement(MainHeader, null), react.createElement(Stories, null), react.createElement(Page, null));
 	}
 
 	reactDom.render(react.createElement(App, null), document.getElementById('root'));
