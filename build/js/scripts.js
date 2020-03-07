@@ -2108,6 +2108,14 @@
 
 	    fetchData();
 	  }, []);
+
+	  function clickEvent(item) {
+	    props.pageToShow(item);
+	    setTimeout(() => {
+	      document.querySelector('.main').classList.add('page-slide-in');
+	    }, 10);
+	  }
+
 	  return react.createElement("main", {
 	    className: loading ? 'stories' : 'stories stories-loaded'
 	  }, !loading ? storiesList.map(item => {
@@ -2116,7 +2124,9 @@
 	    }, react.createElement(Story, {
 	      id: item
 	    }), react.createElement("button", {
-	      onClick: () => props.pageToShow(item)
+	      onClick: e => {
+	        props.pageShown ? e.preventDefault() : clickEvent(item);
+	      }
 	    }, "Read more..."));
 	  }) : () => {
 	    return react.createElement("p", null, "Loading...");
@@ -2124,13 +2134,13 @@
 	}
 
 	function Page(props) {
+	  let [hideClass, setHideClass] = react.useState(false);
 	  react.useEffect(() => {}, []);
+
 	  return react.createElement("div", {
 	    className: "page",
 	    id: props.id
-	  }, react.createElement("button", {
-	    onClick: () => props.hidePage()
-	  }, "Close"), react.createElement("header", {
+	  }, react.createElement("header", {
 	    className: "page-header"
 	  }, react.createElement(Story, {
 	    id: props.id
@@ -2147,21 +2157,29 @@
 	    setShowPage(true);
 	  };
 
-	  const hideThePage = () => {
-	    setPageID();
-	    setShowPage(false);
+	  const hidePage = () => {
+	    document.querySelector('.main').classList.remove('page-slide-in');
+	    setTimeout(() => {
+	      setPageID();
+	      setShowPage(false);
+	    }, 400);
 	  };
 
 	  return react.createElement("div", {
 	    className: "main"
 	  }, react.createElement(MainHeader, null), react.createElement(Stories, {
-	    pageToShow: getPage
+	    pageToShow: getPage,
+	    pageShown: showPage
 	  }), showPage ? react.createElement(Page, {
-	    id: pageID,
-	    hidePage: hideThePage
-	  }) : null);
+	    id: pageID
+	  }) : null, react.createElement("button", {
+	    className: "close-btn",
+	    onClick: hidePage
+	  }, "Close"));
 	}
 
 	reactDom.render(react.createElement(App, null), document.getElementById('root'));
 
 })));
+
+//# sourceMappingURL=../src/sourcemaps/scripts.js.map

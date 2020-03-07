@@ -12,3 +12,11 @@
         }
     }
 }
+@mixin hide() {
+    opacity: 0;
+    transform: scale(0);
+}
+@mixin show() {
+    opacity: 1;
+    transform: scale(1);
+}

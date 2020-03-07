@@ -108,13 +108,13 @@ function buildScripts() {
   })
   )
   .pipe(dest(buildDir + '/js/'))
+  .pipe(sourcemaps.write('../src/sourcemaps'))
   .pipe(minify({
     ext:{
       min:'.min.js'
     }
   }))
   .pipe(dest(buildDir + '/js/'))
-  .pipe(sourcemaps.write('../src/sourcemaps'))
   .pipe(browsersync.reload({ stream: true }));
 }
 

@@ -23,6 +23,11 @@ function Stories(props) {
         fetchData();
     }, []);
 
+    function clickEvent(item) {
+        props.pageToShow(item);
+        setTimeout(()=>{document.querySelector('.main').classList.add('page-slide-in')}, 10);
+    }
+
     return (
         <main className={ loading ? 'stories' : 'stories stories-loaded'}>
             {
@@ -31,7 +36,7 @@ function Stories(props) {
                 storiesList.map((item) => { return( 
                     <article className={'story story-' + item}>
                         <Story id={item} />
-                        <button onClick={(e)=>{ pageShown ? props.pageToShow(item) : e.preventDefault()}}>Read more...</button> 
+                        <button onClick={(e)=>{ props.pageShown ? e.preventDefault() : clickEvent(item) }}>Read more...</button> 
                     </article>
                 ) }) 
                 : 

@@ -17,18 +17,20 @@ function App(props) {
         setShowPage(true);
     }
 
-    const hideThePage = () =>{
+    const hidePage = () =>{
+        document.querySelector('.main').classList.remove('page-slide-in');
         setTimeout(()=>{
             setPageID();
             setShowPage(false);
-        }, 800); 
+        }, 400);
     }
 
     return (
         <div className="main">
             <MainHeader />
             <Stories pageToShow={getPage} pageShown={showPage} />
-            { showPage ? <Page id={pageID} hidePage={hideThePage} /> : null }
+            { showPage ? <Page id={pageID} /> : null }
+            <button className="close-btn" onClick={hidePage}>Close</button>
         </div>
     )    
 }

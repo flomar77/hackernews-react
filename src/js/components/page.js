@@ -6,16 +6,15 @@ function Page(props) {
 
     let [ hideClass, setHideClass ] = React.useState(false);
     React.useEffect(() => {
+        
     }, []);
 
-    const hideThePage() {
-        setHideClass(true);
-        props.hidePage();
+    const hideThePage = () => {
+        setHideClass(true);        
     }
 
     return (
-        <div className={hideClass ? 'page slide-out' : 'page' } id={props.id}>
-            <button onClick={hideThePage()}>Close</button>
+        <div className='page' id={props.id}>
             <header className="page-header">
                 <Story id={props.id}/>
             </header>
