@@ -26,12 +26,12 @@ function App(props) {
     }
 
     return (
-        <div className="main">
+        <main className="main">
             <MainHeader />
             <Stories pageToShow={getPage} pageShown={showPage} />
             { showPage ? <Page id={pageID} /> : null }
             <button className="close-btn" onClick={hidePage}>Close</button>
-        </div>
+        </main>
     )    
 }
 

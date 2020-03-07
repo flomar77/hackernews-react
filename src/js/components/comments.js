@@ -6,7 +6,7 @@ function Comments(props) {
     }, []);
 
     return (
-        <div className="page">
+        <div className="comments">
 
         </div>
     )    

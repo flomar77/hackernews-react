@@ -29,7 +29,7 @@ function Stories(props) {
     }
 
     return (
-        <main className={ loading ? 'stories' : 'stories stories-loaded'}>
+        <div className={ loading ? 'stories' : 'stories stories-loaded' }>
             {
                 !loading 
                 ? 
@@ -42,7 +42,7 @@ function Stories(props) {
                 : 
                 ()=>{ return( <p>Loading...</p> ); }
             }
-        </main>
+        </div>
     )    
 }
 

@@ -2116,7 +2116,7 @@
 	    }, 10);
 	  }
 
-	  return react.createElement("main", {
+	  return react.createElement("div", {
 	    className: loading ? 'stories' : 'stories stories-loaded'
 	  }, !loading ? storiesList.map(item => {
 	    return react.createElement("article", {
@@ -2165,7 +2165,7 @@
 	    }, 400);
 	  };
 
-	  return react.createElement("div", {
+	  return react.createElement("main", {
 	    className: "main"
 	  }, react.createElement(MainHeader, null), react.createElement(Stories, {
 	    pageToShow: getPage,
