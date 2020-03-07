@@ -1,6 +1,6 @@
 {
-  "name": "static-app",
-  "version": "1.0.0",
+  "name": "hacker-news-app",
+  "version": "0.0.1",
   "browserslist": [
     "last 15 versions",
     "> 1%",
