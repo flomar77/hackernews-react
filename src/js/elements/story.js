@@ -27,7 +27,8 @@ function Story(props) {
         } else {
             fetchData();
         }
-    }, [])
+
+    }, [props.id])
 
     return (
         <div className="story-content">

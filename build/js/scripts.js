@@ -2084,7 +2084,7 @@
 	    } else {
 	      fetchData();
 	    }
-	  }, []);
+	  }, [props.id]);
 	  return react.createElement("div", {
 	    className: "story-content"
 	  }, react.createElement("span", {
@@ -2094,13 +2094,48 @@
 	  }, story.score, " by ", story.by));
 	}
 
+	const splitArrInChunks = (arr, chunk_size) => {
+	  // let rest = arr.length % n, // how much to divide
+	  //     restUsed = rest, // to keep track of the division over the elements
+	  //     partLength = Math.floor(arr.length / n),
+	  //     result = [];
+	  // for(var i = 0; i < arr.length; i += partLength) {
+	  //     var end = partLength + i,
+	  //         add = false;
+	  //     if(rest !== 0 && restUsed) { // should add one element for the division
+	  //         end++;
+	  //         restUsed--; // we've used one division element now
+	  //         add = true;
+	  //     }
+	  //     result.push(arr.slice(i, end)); // part of the array
+	  //     if(add) {
+	  //         i++; // also increment i in the case we added an extra element for division
+	  //     }
+	  // }
+	  // return result;
+	  var results = [];
+
+	  while (arr.length) {
+	    results.push(arr.splice(0, chunk_size));
+	  }
+
+	  return results;
+	};
+
 	function Stories(props) {
 	  const url = vars.hnewsAPI + 'topstories.json';
+	  const storiesPerPage = 20;
+	  let [position, setNavPosition] = react.useState(0);
 	  let [storiesList, setStoriesList] = react.useState([]);
+	  let [currentList, setCurrentStoriesList] = react.useState([]);
 	  let [loading, setLoading] = react.useState(true);
 	  react.useEffect(() => {
 	    const fetchData = async () => {
-	      axios$1.get(url).then(result => setStoriesList(result.data.splice(0, 20))).then(setLoading(false)).catch(err => {
+	      axios$1.get(url).then(result => {
+	        const list = splitArrInChunks(result.data, storiesPerPage);
+	        setStoriesList(list);
+	        setCurrentStoriesList(list[position]);
+	      }).then(setLoading(false)).then(console.log('fetched')).catch(err => {
 	        console.log(err);
 	        setLoading(false);
 	      });
@@ -2116,9 +2151,31 @@
 	    }, 10);
 	  }
 
+	  const changeNav = direction => {
+	    let pos;
+
+	    if (direction === 'down' && position < storiesList.length - 1) {
+	      pos = position + 1;
+	      setNavPosition(pos);
+	      setCurrentStoriesList(storiesList[pos]);
+	    } else if (direction === 'up' && position > 0) {
+	      pos = position - 1;
+	      setNavPosition(pos);
+	      setCurrentStoriesList(storiesList[pos]);
+	    }
+	  };
+
+	  console.log('Page: ' + position);
+	  console.log(storiesList);
 	  return react.createElement("div", {
 	    className: loading ? 'stories' : 'stories stories-loaded'
-	  }, !loading ? storiesList.map(item => {
+	  }, react.createElement("button", {
+	    className: "btn-up",
+	    onClick: () => changeNav('up')
+	  }, "Up"), react.createElement("button", {
+	    className: "btn-down",
+	    onClick: () => changeNav('down')
+	  }, "Down"), react.createElement("div", null, "Page ", react.createElement("span", null, position + 1)), !loading ? currentList.map(item => {
 	    return react.createElement("article", {
 	      className: 'story story-' + item
 	    }, react.createElement(Story, {
