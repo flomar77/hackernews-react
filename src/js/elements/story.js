@@ -27,7 +27,6 @@ function Story(props) {
         } else {
             fetchData();
         }
-
     }, [props.id])
 
     return (
@@ -35,7 +34,7 @@ function Story(props) {
             <span className="story-id">{id}</span>
             <h3>{story.title}</h3>
             <p>URL: {story.url}</p>
-            <span className="infos">{story.score} by {story.by}</span>
+            <span className="infos">{story.score} points by {story.by}</span>
         </div>
     )    
 }

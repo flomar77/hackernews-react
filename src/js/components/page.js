@@ -1,6 +1,7 @@
 import React from 'react';
 import { vars } from '../base/variables.js';
 import Story from '../elements/story.js';
+import Comments from './comments.js';
 
 function Page(props) {
 
@@ -18,6 +19,9 @@ function Page(props) {
             <header className="page-header">
                 <Story id={props.id}/>
             </header>
+            <div className="page-content">
+                <Comments parent={props.id} />
+            </div>
         </div>
     )    
 }

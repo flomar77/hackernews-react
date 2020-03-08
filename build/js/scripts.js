@@ -2091,7 +2091,7 @@
 	    className: "story-id"
 	  }, id), react.createElement("h3", null, story.title), react.createElement("p", null, "URL: ", story.url), react.createElement("span", {
 	    className: "infos"
-	  }, story.score, " by ", story.by));
+	  }, story.score, " points by ", story.by));
 	}
 
 	const splitArrInChunks = (arr, chunk_size) => {
@@ -2190,6 +2190,64 @@
 	  });
 	}
 
+	function Comment(props) {
+	  const id = props.id;
+	  const url = vars.hnewsAPI + 'item/' + id + '.json';
+	  let [loading, setLoading] = react.useState(true);
+	  let [comment, setComment] = react.useState({});
+	  react.useEffect(() => {
+	    const fetchData = async () => {
+	      axios$1.get(url).then(result => {
+	        localStorage.setItem(id, JSON.stringify(result.data));
+	        setComment(result.data);
+	      }).then(setLoading(false)).catch(err => {
+	        console.log(err);
+	        setLoading(false);
+	      });
+	    };
+
+	    if (localStorage.getItem(id) !== null && localStorage.getItem(id).length > 0) {
+	      setComment(JSON.parse(localStorage.getItem(id)));
+	    } else {
+	      fetchData();
+	    }
+	  }, [props.id]);
+	  return react.createElement("div", {
+	    className: "comment-content"
+	  }, react.createElement("div", {
+	    className: "comment-body",
+	    dangerouslySetInnerHTML: {
+	      __html: comment.text
+	    }
+	  }), react.createElement("span", null, "By ", comment.by), comment.kids && comment.kids.length > 0 ? react.createElement(Comments, {
+	    parent: id
+	  }) : null);
+	}
+
+	function Comments(props) {
+	  const pid = props.parent;
+	  let localItem = {};
+	  let [commentsList, setCommentsList] = react.useState([]);
+	  react.useEffect(() => {
+	    if (localStorage.getItem(pid) !== null) {
+	      localItem = JSON.parse(localStorage.getItem(pid));
+
+	      if (localItem.kids && localItem.kids.length > 0) {
+	        setCommentsList(localItem.kids);
+	      }
+	    }
+	  }, []);
+	  return react.createElement("div", {
+	    className: "comments"
+	  }, react.createElement("ul", null, commentsList.map(id => {
+	    return react.createElement("li", {
+	      key: id
+	    }, react.createElement(Comment, {
+	      id: id
+	    }));
+	  })));
+	}
+
 	function Page(props) {
 	  let [hideClass, setHideClass] = react.useState(false);
 	  react.useEffect(() => {}, []);
@@ -2201,6 +2259,10 @@
 	    className: "page-header"
 	  }, react.createElement(Story, {
 	    id: props.id
+	  })), react.createElement("div", {
+	    className: "page-content"
+	  }, react.createElement(Comments, {
+	    parent: props.id
 	  })));
 	}
 
