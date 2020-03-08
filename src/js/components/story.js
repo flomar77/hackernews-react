@@ -22,18 +22,18 @@ function Story(props) {
             setLoading(false);
             });
         };
-        if ( localStorage.getItem(id) !== null && localStorage.getItem(id).length > 0 ) {
-            setStory(JSON.parse(localStorage.getItem(id)));
-        } else {
-            fetchData();
-        }
+        // if ( localStorage.getItem(id) !== null && localStorage.getItem(id).length > 0 ) {
+        //     setStory(JSON.parse(localStorage.getItem(id)));
+        // } else {
+        fetchData();
+        // }
     }, [props.id])
     return (
         <div className="story-content">
             <span className="story-id">{id}</span>
-            <h3>{story.title}</h3>
-            <p>URL: {story.url}</p>
-            <span className="infos">{story.score} points by {story.by}</span>
+            <h2>{story.title}</h2>
+            <span className="story-url">URL: {story.url}</span>
+            <span className="story-infos">{story.score} points by {story.by}</span>
         </div>
     )    
 }

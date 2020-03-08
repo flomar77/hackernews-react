@@ -1,14 +1,14 @@
 @mixin liFromTo() {
     @for $i from 1 through 20 {
         &:nth-child(#{$i}) {
-            animation-delay: 250ms * $i;
+            animation-delay: 100ms * $i;
         }
     }
 }
 @mixin liFromToSlow() {
     @for $i from 1 through 20 {
         &:nth-child(#{$i}) {
-            animation-delay: 100ms * $i;
+            animation-delay: 200ms * $i;
         }
     }
 }

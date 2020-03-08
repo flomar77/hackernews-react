@@ -1,0 +1,20 @@
+button, .btn {
+    border: none;
+    background-color: rgba($yellow, 1);
+    color: $black;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: background-color 0.2s linear;
+    &:hover {
+        background-color: rgba($yellow, 0.8);
+    }
+}
+.readmore {
+    font-size: 13px;
+}
+.btn-up, .btn-down {
+    position: relative;
+    margin-right: 4px;
+    margin-top: -8px;
+    z-index: 8;
+}

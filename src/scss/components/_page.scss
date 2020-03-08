@@ -1,0 +1,26 @@
+.page {
+    position: fixed;
+    top:0;
+    left: 100%;
+    width: 90vw;
+    height: 100%;
+    overflow-y: scroll;
+    z-index: 10;
+    background-color: $lightergrey;
+    color: $black;
+    opacity: 0.8;
+    transition: all 0.3s ease-out;
+    // padding: $rhythm * 3;
+    .page-slide-in & {
+        left: 10vw;
+        opacity: 1;
+    }
+    .page-header {
+        background-color: $yellow;
+        padding: $rhythm $dist-l;
+    }
+    .page-content {
+        background-color: $lightergrey;
+        padding: $rhythm $dist-l;
+    }
+}

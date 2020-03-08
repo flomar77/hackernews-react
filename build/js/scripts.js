@@ -636,7 +636,9 @@
 	  react.useEffect(() => {}, []);
 	  return react.createElement("header", {
 	    className: "main-header"
-	  }, react.createElement("h1", null, "Hacker News"));
+	  }, react.createElement("div", {
+	    className: "container"
+	  }, react.createElement("h1", null, "Hacker News")));
 	}
 
 	var bind = function bind(fn, thisArg) {
@@ -2077,20 +2079,21 @@
 	        console.log(err);
 	        setLoading(false);
 	      });
-	    };
+	    }; // if ( localStorage.getItem(id) !== null && localStorage.getItem(id).length > 0 ) {
+	    //     setStory(JSON.parse(localStorage.getItem(id)));
+	    // } else {
 
-	    if (localStorage.getItem(id) !== null && localStorage.getItem(id).length > 0) {
-	      setStory(JSON.parse(localStorage.getItem(id)));
-	    } else {
-	      fetchData();
-	    }
+
+	    fetchData(); // }
 	  }, [props.id]);
 	  return react.createElement("div", {
 	    className: "story-content"
 	  }, react.createElement("span", {
 	    className: "story-id"
-	  }, id), react.createElement("h3", null, story.title), react.createElement("p", null, "URL: ", story.url), react.createElement("span", {
-	    className: "infos"
+	  }, id), react.createElement("h2", null, story.title), react.createElement("span", {
+	    className: "story-url"
+	  }, "URL: ", story.url), react.createElement("span", {
+	    className: "story-infos"
 	  }, story.score, " points by ", story.by));
 	}
 
@@ -2127,7 +2130,7 @@
 	    fetchData();
 	    setTimeout(() => {
 	      document.querySelector('.main').classList.add('stories-loaded');
-	    }, 800);
+	    }, 350);
 	  }, []);
 
 	  function clickEvent(item) {
@@ -2147,28 +2150,31 @@
 
 	  const changeNavActions = number => {
 	    main.classList.remove('stories-loaded');
+	    main.classList.add('stories-unloaded');
 	    let pos = position + number;
 	    setTimeout(() => {
 	      setNavPosition(pos);
 	      setCurrentStoriesList(storiesList[pos]);
-	    }, 250);
+	    }, 450);
 	    setTimeout(() => {
 	      main.classList.add('stories-loaded');
-	    }, 350);
+	      main.classList.remove('stories-unloaded');
+	    }, 550);
 	  };
 
-	  console.log('Page: ' + position);
-	  console.log(storiesList);
-	  console.log(main);
 	  return react.createElement("div", {
 	    className: "stories"
+	  }, react.createElement("div", {
+	    className: "container"
 	  }, react.createElement("button", {
 	    className: "btn-up",
 	    onClick: () => changeNav('up')
 	  }, "Up"), react.createElement("button", {
 	    className: "btn-down",
 	    onClick: () => changeNav('down')
-	  }, "Down"), react.createElement("div", null, "Page ", react.createElement("span", null, position + 1), " of ", storiesList.length), react.createElement("div", {
+	  }, "Down"), react.createElement("div", {
+	    className: "stories-nav"
+	  }, "Page ", react.createElement("span", null, position + 1), " of ", storiesList.length), react.createElement("div", {
 	    className: "stories-wrapper"
 	  }, !loading ? currentList.map(item => {
 	    return react.createElement("article", {
@@ -2176,13 +2182,14 @@
 	    }, react.createElement(Story, {
 	      id: item
 	    }), react.createElement("button", {
+	      className: "readmore",
 	      onClick: e => {
 	        props.pageShown ? e.preventDefault() : clickEvent(item);
 	      }
 	    }, "Read more..."));
 	  }) : () => {
 	    return react.createElement("p", null, "Loading...");
-	  }));
+	  })));
 	}
 
 	function Comment(props) {
@@ -2238,13 +2245,13 @@
 	  }, []);
 	  return react.createElement("div", {
 	    className: "comments"
-	  }, react.createElement("ul", null, commentsList.map(id => {
+	  }, react.createElement("ul", null, commentsList.length > 0 ? commentsList.map(id => {
 	    return react.createElement("li", {
 	      key: id
 	    }, react.createElement(Comment, {
 	      id: id
 	    }));
-	  })));
+	  }) : react.createElement("p", null, "No Comments")));
 	}
 
 	function Page(props) {

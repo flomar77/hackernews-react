@@ -7,7 +7,9 @@ function MainHeader(props) {
 
     return (
         <header className="main-header">
-            <h1>Hacker News</h1>
+            <div className="container">
+                <h1>Hacker News</h1>
+            </div>
         </header>
     )    
 }

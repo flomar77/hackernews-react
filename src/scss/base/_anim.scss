@@ -1,0 +1,24 @@
+@keyframes appearLeft {
+    from {opacity: 0; left: -50px;}
+    to {opacity: 1; left: 0px;}
+}
+@keyframes disappearLeft {
+    from {opacity: 1; left: 0px;}
+    to {opacity: 0; left: -50px;}
+}
+// @keyframes appearRight {
+//     from {opacity: 0; left: 50px;}
+//     to {opacity: 1; left: 0px;}
+// }
+// @keyframes appearFast {
+//     from {opacity: 0.6; left: -10px;}
+//     to {opacity: 1; left: 0px;}
+// }
+// @keyframes appearDown {
+//     from {opacity: 0.2; top: -20px;}
+//     to {opacity: 1; top: 0px;}
+// }
+// @keyframes appearUp {
+//     from {opacity: 0; top: 10px;}
+//     to {opacity: 1; top: 0px;}
+// }

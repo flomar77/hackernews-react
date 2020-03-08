@@ -1,0 +1,33 @@
+main {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+.main-header {
+    background-color: $dklila;
+    color: $white;
+    padding: $rhythm 0;
+    position: relative;
+    width: 100%;
+    height: 90px;
+    transition: height 0.2s ease-in-out;
+    .page-slide-in & {
+        position: absolute;
+        height: 100vh;
+        z-index: 8;
+        h1 {
+            opacity: 0.6;
+        }
+    }
+}
+.close-btn {
+    @include hide();
+    position: fixed;
+    top:0;
+    right: 0;
+    z-index: 12;
+    transition: opacity 0.3s linear;
+    .page-slide-in & {
+        @include show();
+    }
+}

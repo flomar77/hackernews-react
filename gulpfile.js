@@ -100,7 +100,10 @@ function buildScripts() {
         'process.env.NODE_ENV': JSON.stringify( 'production' )
       }),
       json()
-    ]
+    ],
+    external: [
+			'React'
+		],
   }, 'umd')
   .on('error', function(err) {
     console.error(err.message);

@@ -30,7 +30,7 @@ function Stories(props) {
             });
         };
         fetchData();
-        setTimeout(()=>{document.querySelector('.main').classList.add('stories-loaded')}, 800);
+        setTimeout(()=>{document.querySelector('.main').classList.add('stories-loaded')}, 350);
     }, []);
 
     function clickEvent(item) {
@@ -48,35 +48,37 @@ function Stories(props) {
 
     const changeNavActions = (number) => {
         main.classList.remove('stories-loaded');
+        main.classList.add('stories-unloaded');
         let pos = position + number;
         setTimeout(()=>{
             setNavPosition(pos);
             setCurrentStoriesList(storiesList[pos]);
-        }, 250);
-        setTimeout(()=>{main.classList.add('stories-loaded')}, 350);
+        }, 450);
+        setTimeout(()=>{
+            main.classList.add('stories-loaded');
+            main.classList.remove('stories-unloaded');
+        }, 550);
     }
-
-    console.log('Page: ' + position);
-    console.log(storiesList);
-    console.log(main);
     return (
         <div className='stories'>
-            <button className="btn-up" onClick={()=>changeNav('up')}>Up</button>
-            <button className="btn-down" onClick={()=>changeNav('down')}>Down</button>
-            <div>Page <span>{position + 1}</span> of {storiesList.length}</div>
-            <div className="stories-wrapper">
-                {
-                    !loading
-                    ? 
-                    currentList.map((item) => { return( 
-                        <article className={'story story-' + item}>
-                            <Story id={item} />
-                            <button onClick={(e)=>{ props.pageShown ? e.preventDefault() : clickEvent(item) }}>Read more...</button> 
-                        </article>
-                    )}) 
-                    : 
-                    ()=>{ return( <p>Loading...</p> ); }
-                }
+            <div className='container'>
+                <button className="btn-up" onClick={()=>changeNav('up')}>Up</button>
+                <button className="btn-down" onClick={()=>changeNav('down')}>Down</button>
+                <div className="stories-nav">Page <span>{position + 1}</span> of {storiesList.length}</div>
+                <div className="stories-wrapper">
+                    {
+                        !loading
+                        ? 
+                        currentList.map((item) => { return( 
+                            <article className={'story story-' + item}>
+                                <Story id={item} />
+                                <button className='readmore' onClick={(e)=>{ props.pageShown ? e.preventDefault() : clickEvent(item) }}>Read more...</button> 
+                            </article>
+                        )}) 
+                        : 
+                        ()=>{ return( <p>Loading...</p> ); }
+                    }
+                </div>
             </div>
         </div>
     )    

@@ -1,0 +1,23 @@
+/* Base colors */
+$white: #FFFFFF;
+$black: #000000;
+$lightergrey: #eaeaea;
+$lightgrey: #929BA2;
+$midgrey: #636D76;
+$darkgrey: #475057;
+$darkergrey: #474B54;
+
+/* CI */
+$dkyellow: #d2b328;
+$yellow: #F4D232;
+$dkbrown: #3d2f29;
+$dklila: #21162b;
+
+$base-font-size: 16px;
+$base-line-height: 1.4;
+
+/* distances */
+$rhythm: ($base-font-size * $base-line-height);
+$dist-s: $rhythm * 0.5;
+$dist-m: $rhythm * 1.25;
+$dist-l: $rhythm * 2.5;

@@ -1,4 +1,10 @@
-@import 'variables';
-@import 'mixins';
-@import 'base';
-@import 'layout';
+@import 'base/variables';
+@import 'base/mixins';
+@import 'base/anim';
+@import 'base/typo';
+@import 'components/base';
+@import 'components/layout';
+@import 'components/stories';
+@import 'components/page';
+@import 'components/comments';
+@import 'components/buttons';

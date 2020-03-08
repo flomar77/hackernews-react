@@ -1,0 +1,59 @@
+.stories {
+    .page-slide-in & {
+        height: 100vh;
+        overflow: hidden;
+        position: absolute;
+        z-index: 6;
+    }
+}
+.stories-wrapper {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+}
+.stories-nav {
+    position: absolute;
+    width: auto;
+    right: 0;
+    top: $dist-s;
+}
+article {
+    opacity: 0;
+    box-sizing: border-box;
+    background-color: $white;
+    position: relative;
+    transition: all 0.3s linear;
+    margin-bottom: $dist-m;
+    padding: $dist-m;
+    width: calc(50% - 20px);
+    margin: $dist-s 10px;
+    padding-bottom: $dist-l;
+}
+main.stories-unloaded article {
+    @include liFromTo();
+    animation: disappearLeft 250ms normal backwards ease-in;
+}
+main.stories-loaded article {
+    @include liFromTo();
+    animation: appearLeft 250ms normal forwards ease-out;
+}
+article {
+    h2 {
+        margin-bottom: 0;
+    }
+    .story-url {
+        font-size: 13px;
+        margin-bottom: $dist-s;
+    }
+    .story-infos {
+        display: block;
+        margin: $dist-m 0;
+    }
+    button.readmore {
+        display: block;
+        position: absolute;
+        bottom: $dist-m;
+        right: $dist-m;
+    }
+}

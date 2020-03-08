@@ -19,7 +19,11 @@ function Comments(props) {
         <div className="comments">
             <ul>
                 {
+                    (commentsList.length > 0)
+                    ?
                     commentsList.map((id)=>{ return ( <li key={id}><Comment id={id} /></li> ) })
+                    :
+                    <p>No Comments</p>
                 }
             </ul>
         </div>
