@@ -1,6 +1,6 @@
 import React from 'react';
 import { vars } from '../base/variables.js';
-import Story from '../elements/story.js';
+import Story from './story.js';
 import Comments from './comments.js';
 
 function Page(props) {

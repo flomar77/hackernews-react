@@ -2095,24 +2095,6 @@
 	}
 
 	const splitArrInChunks = (arr, chunk_size) => {
-	  // let rest = arr.length % n, // how much to divide
-	  //     restUsed = rest, // to keep track of the division over the elements
-	  //     partLength = Math.floor(arr.length / n),
-	  //     result = [];
-	  // for(var i = 0; i < arr.length; i += partLength) {
-	  //     var end = partLength + i,
-	  //         add = false;
-	  //     if(rest !== 0 && restUsed) { // should add one element for the division
-	  //         end++;
-	  //         restUsed--; // we've used one division element now
-	  //         add = true;
-	  //     }
-	  //     result.push(arr.slice(i, end)); // part of the array
-	  //     if(add) {
-	  //         i++; // also increment i in the case we added an extra element for division
-	  //     }
-	  // }
-	  // return result;
 	  var results = [];
 
 	  while (arr.length) {
@@ -2125,11 +2107,12 @@
 	function Stories(props) {
 	  const url = vars.hnewsAPI + 'topstories.json';
 	  const storiesPerPage = 20;
+	  const main = document.querySelector('.main');
 	  let [position, setNavPosition] = react.useState(0);
 	  let [storiesList, setStoriesList] = react.useState([]);
 	  let [currentList, setCurrentStoriesList] = react.useState([]);
 	  let [loading, setLoading] = react.useState(true);
-	  react.useEffect(() => {
+	  react.useEffect(main => {
 	    const fetchData = async () => {
 	      axios$1.get(url).then(result => {
 	        const list = splitArrInChunks(result.data, storiesPerPage);
@@ -2142,40 +2125,52 @@
 	    };
 
 	    fetchData();
+	    setTimeout(() => {
+	      document.querySelector('.main').classList.add('stories-loaded');
+	    }, 800);
 	  }, []);
 
 	  function clickEvent(item) {
 	    props.pageToShow(item);
 	    setTimeout(() => {
-	      document.querySelector('.main').classList.add('page-slide-in');
+	      main.classList.add('page-slide-in');
 	    }, 10);
 	  }
 
 	  const changeNav = direction => {
-	    let pos;
-
 	    if (direction === 'down' && position < storiesList.length - 1) {
-	      pos = position + 1;
-	      setNavPosition(pos);
-	      setCurrentStoriesList(storiesList[pos]);
+	      changeNavActions(1);
 	    } else if (direction === 'up' && position > 0) {
-	      pos = position - 1;
+	      changeNavActions(-1);
+	    }
+	  };
+
+	  const changeNavActions = number => {
+	    main.classList.remove('stories-loaded');
+	    let pos = position + number;
+	    setTimeout(() => {
 	      setNavPosition(pos);
 	      setCurrentStoriesList(storiesList[pos]);
-	    }
+	    }, 250);
+	    setTimeout(() => {
+	      main.classList.add('stories-loaded');
+	    }, 350);
 	  };
 
 	  console.log('Page: ' + position);
 	  console.log(storiesList);
+	  console.log(main);
 	  return react.createElement("div", {
-	    className: loading ? 'stories' : 'stories stories-loaded'
+	    className: "stories"
 	  }, react.createElement("button", {
 	    className: "btn-up",
 	    onClick: () => changeNav('up')
 	  }, "Up"), react.createElement("button", {
 	    className: "btn-down",
 	    onClick: () => changeNav('down')
-	  }, "Down"), react.createElement("div", null, "Page ", react.createElement("span", null, position + 1)), !loading ? currentList.map(item => {
+	  }, "Down"), react.createElement("div", null, "Page ", react.createElement("span", null, position + 1), " of ", storiesList.length), react.createElement("div", {
+	    className: "stories-wrapper"
+	  }, !loading ? currentList.map(item => {
 	    return react.createElement("article", {
 	      className: 'story story-' + item
 	    }, react.createElement(Story, {
@@ -2187,7 +2182,7 @@
 	    }, "Read more..."));
 	  }) : () => {
 	    return react.createElement("p", null, "Loading...");
-	  });
+	  }));
 	}
 
 	function Comment(props) {
@@ -2219,9 +2214,13 @@
 	    dangerouslySetInnerHTML: {
 	      __html: comment.text
 	    }
-	  }), react.createElement("span", null, "By ", comment.by), comment.kids && comment.kids.length > 0 ? react.createElement(Comments, {
+	  }), react.createElement("span", null, "By ", comment.by), comment.kids && comment.kids.length > 0 ? react.createElement("div", {
+	    className: "child-comments"
+	  }, react.createElement("span", {
+	    className: "arrow"
+	  }, "Show/Hide"), react.createElement(Comments, {
 	    parent: id
-	  }) : null);
+	  })) : null);
 	}
 
 	function Comments(props) {

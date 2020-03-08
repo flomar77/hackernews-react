@@ -1,5 +1,5 @@
 import React from 'react';
-import Comment from '../elements/comment.js';
+import Comment from './comment.js';
 
 function Comments(props) {
     const pid = props.parent;
