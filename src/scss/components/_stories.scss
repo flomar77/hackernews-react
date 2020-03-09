@@ -5,6 +5,7 @@
         position: absolute;
         z-index: 6;
     }
+    padding-bottom: $dist-l;
 }
 .stories-wrapper {
     position: relative;
@@ -40,15 +41,21 @@ main.stories-loaded article {
 }
 article {
     h2 {
-        margin-bottom: 0;
+        margin-bottom: $dist-s;  
     }
     .story-url {
-        font-size: 13px;
         margin-bottom: $dist-s;
+        a {
+            color: $midgrey;
+        }
     }
     .story-infos {
         display: block;
+        font-size: $small;
         margin: $dist-m 0;
+    }
+    .story-id {
+        font-size: $small;
     }
     button.readmore {
         display: block;

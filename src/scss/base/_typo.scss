@@ -3,22 +3,19 @@
 $ft-heading: "Archivo", Helvetica, Arial, sans-serif;
 $ft-body: "Open Sans", Helvetica, Arial, sans-serif;
 
-// #{h(1,6)}{
-//     font-family: #{$ft-heading};
-//     margin-bottom: $dist-m;
-// }
+$small: 0.9rem;
+
 body {
     font-family: $ft-body;
     font-weight: 300;
 }
-h1, h2, h3, h4, h5, h6 {
+#{h(1,6)}{
     font-family: $ft-heading;
     margin-top: 0;
     margin-bottom: $dist-m;  
 }
 h1 {
     font-size: 42px;
-    margin-top: $dist-s; 
     letter-spacing: 1px;
 }
 h2 {

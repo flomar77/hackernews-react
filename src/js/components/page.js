@@ -20,6 +20,7 @@ function Page(props) {
                 <Story id={props.id}/>
             </header>
             <div className="page-content">
+                <h3>Comments</h3>
                 <Comments parent={props.id} />
             </div>
         </div>

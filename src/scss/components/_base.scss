@@ -11,8 +11,12 @@ body {
     @media screen and (min-width: 768px) {
     }
 }
-a, a:link {
+a {
     color: $dkyellow;
+    transition: color .3s linear;
+    &:hover {
+        color: $lila;
+    }
 }
 #root {
     width: 100%;

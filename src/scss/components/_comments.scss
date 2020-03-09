@@ -1,0 +1,48 @@
+.comments > ul {
+    padding: $rhythm 0;
+    margin: 0;
+    li {
+        list-style-type: none;
+    }
+    > li {
+        padding: $dist-m $dist-l; 
+    }
+    > li:nth-child(even) {
+        background-color: rgba($white, 0.6);
+    }
+    .child-comments ul {
+        padding: 0;
+        > li {
+            padding: $dist-s $dist-m; 
+        }
+    }
+    p:last-child {
+        margin-bottom: 0;
+    }
+} 
+.comment-meta {
+    display: block;
+    font-size: 0.9rem;
+    color: $darkgrey;
+    margin-bottom: $dist-s;
+    .comment-by {
+        font-weight: bold;
+    }
+}
+.child-comments {
+    .comments {
+        background-color: $white;
+    }
+    &.comments-open > .comments{
+        height: auto;
+        overflow: visible;
+        padding-top: $dist-s;
+        padding-bottom: $dist-s;
+        // transition: height 0.2s ease-out; 
+    }
+    &.comments-close > .comments{
+        height: 0;
+        overflow: hidden;
+        transition: all 0.2s ease-out; 
+    }
+}

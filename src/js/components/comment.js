@@ -9,6 +9,7 @@ function Comment(props) {
 
     let [ loading, setLoading ] = React.useState(true);
     let [ comment, setComment ] = React.useState({});
+    let [ showChildren, setShowChildren ] = React.useState(false);
 
     React.useEffect(() => {
         const fetchData = async () => {
@@ -30,15 +31,26 @@ function Comment(props) {
         }
     }, [props.id]);
 
+    const showComments = () => {
+        if (showChildren) {
+            setShowChildren(false);
+        } else {
+            setShowChildren(true);
+        }
+    }
+
     return (
         <div className="comment-content">
-            <div className="comment-body" dangerouslySetInnerHTML={{ __html: comment.text }}></div>
-            <span>By {comment.by}</span>
+            <div className="comment-body">
+                <span className="comment-meta"><span className="comment-by">{comment.by}</span> wrote:</span>
+                <p dangerouslySetInnerHTML={{ __html: comment.text }}></p>
+            </div>
+            
             {
                 ( comment.kids && comment.kids.length > 0 )
                 ?
-                <div className="child-comments">
-                    <button className="arrow"><span>Show/Hide</span></button>
+                <div className={ showChildren ? "child-comments comments-open" : "child-comments comments-close"}>
+                    <button className="arrow" onClick={()=>showComments()}><span>More Comments</span></button>
                     <Comments parent={id} />
                 </div>
                 :

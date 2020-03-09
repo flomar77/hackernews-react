@@ -2092,7 +2092,10 @@
 	    className: "story-id"
 	  }, id), react.createElement("h2", null, story.title), react.createElement("span", {
 	    className: "story-url"
-	  }, "URL: ", story.url), react.createElement("span", {
+	  }, "URL: ", react.createElement("a", {
+	    href: story.url,
+	    target: "_blank"
+	  }, story.url)), react.createElement("span", {
 	    className: "story-infos"
 	  }, story.score, " points by ", story.by));
 	}
@@ -2197,6 +2200,7 @@
 	  const url = vars.hnewsAPI + 'item/' + id + '.json';
 	  let [loading, setLoading] = react.useState(true);
 	  let [comment, setComment] = react.useState({});
+	  let [showChildren, setShowChildren] = react.useState(false);
 	  react.useEffect(() => {
 	    const fetchData = async () => {
 	      axios$1.get(url).then(result => {
@@ -2214,18 +2218,33 @@
 	      fetchData();
 	    }
 	  }, [props.id]);
+
+	  const showComments = () => {
+	    if (showChildren) {
+	      setShowChildren(false);
+	    } else {
+	      setShowChildren(true);
+	    }
+	  };
+
 	  return react.createElement("div", {
 	    className: "comment-content"
 	  }, react.createElement("div", {
-	    className: "comment-body",
+	    className: "comment-body"
+	  }, react.createElement("span", {
+	    className: "comment-meta"
+	  }, react.createElement("span", {
+	    className: "comment-by"
+	  }, comment.by), " wrote:"), react.createElement("p", {
 	    dangerouslySetInnerHTML: {
 	      __html: comment.text
 	    }
-	  }), react.createElement("span", null, "By ", comment.by), comment.kids && comment.kids.length > 0 ? react.createElement("div", {
-	    className: "child-comments"
+	  })), comment.kids && comment.kids.length > 0 ? react.createElement("div", {
+	    className: showChildren ? "child-comments comments-open" : "child-comments comments-close"
 	  }, react.createElement("button", {
-	    className: "arrow"
-	  }, react.createElement("span", null, "Show/Hide")), react.createElement(Comments, {
+	    className: "arrow",
+	    onClick: () => showComments()
+	  }, react.createElement("span", null, "More Comments")), react.createElement(Comments, {
 	    parent: id
 	  })) : null);
 	}
@@ -2267,7 +2286,7 @@
 	    id: props.id
 	  })), react.createElement("div", {
 	    className: "page-content"
-	  }, react.createElement(Comments, {
+	  }, react.createElement("h3", null, "Comments"), react.createElement(Comments, {
 	    parent: props.id
 	  })));
 	}

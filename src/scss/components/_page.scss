@@ -9,7 +9,7 @@
     background-color: $lightergrey;
     color: $black;
     opacity: 0.8;
-    transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out 0.2s;
     // padding: $rhythm * 3;
     .page-slide-in & {
         left: 10vw;
@@ -18,9 +18,24 @@
     .page-header {
         background-color: $yellow;
         padding: $rhythm $dist-l;
+        .story-url a {
+            color: $lila;
+            &:hover {
+                color: $black;
+            }
+        }
+        .story-url,
+        .story-infos {
+            display: block;
+            margin-bottom: $dist-s;
+        }
     }
     .page-content {
         background-color: $lightergrey;
-        padding: $rhythm $dist-l;
+        h3 {
+            background-color: rgba($white, 0.6);
+            margin: 0;
+            padding: $dist-s $dist-l; 
+        }
     }
 }
