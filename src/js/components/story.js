@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import * as timeago from 'timeago.js';
 import { vars } from '../base/variables.js';
 
 function Story(props) {
@@ -31,9 +32,10 @@ function Story(props) {
     return (
         <div className="story-content">
             <span className="story-id">{id}</span>
+            
             <h2>{story.title}</h2>
             <span className="story-url">URL: <a href={story.url} target="_blank">{story.url}</a></span>
-            <span className="story-infos">{story.score} points by {story.by}</span>
+    <span className="story-infos">{story.score} points by {story.by} {timeago.format(story.time * 1000)} {story.kids ?  ' | ' + story.kids.length + ' Comments' : null }</span>
         </div>
     )    
 }

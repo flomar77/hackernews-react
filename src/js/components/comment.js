@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import * as timeago from 'timeago.js';
 import { vars } from '../base/variables.js';
 import Comments from './comments.js';
 
@@ -42,7 +43,7 @@ function Comment(props) {
     return (
         <div className="comment-content">
             <div className="comment-body">
-                <span className="comment-meta"><span className="comment-by">{comment.by}</span> wrote:</span>
+                <span className="comment-meta"><span className="comment-by">{comment.by}</span> wrote {timeago.format(comment.time * 1000)}:</span>
                 <p dangerouslySetInnerHTML={{ __html: comment.text }}></p>
             </div>
             
