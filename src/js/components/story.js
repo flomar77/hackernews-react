@@ -30,6 +30,7 @@ function Story(props) {
         };
         fetchData();
     }, [props.id])
+    
     return (
         <div className="story-content">
             <span className="story-index">{nr}</span>            
