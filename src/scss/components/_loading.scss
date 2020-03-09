@@ -13,6 +13,7 @@
     margin: 10px auto;
     opacity: 0.8;
     transition: opacity 0.4s linear;
+    z-index: -1;
     .stories-loaded & {
         opacity: 0;
         height: 0;
