@@ -64,8 +64,16 @@ function buildScripts() {
     {
       "quiet": "isWarning",
       "parser": "babel-eslint",
-      "plugins": ["react"],
-      "extends": ["eslint:recommended", "plugin:react/recommended"]
+      "plugins": ["react","jam3"],
+      "extends": ["eslint:recommended", "plugin:react/recommended"],
+      "rules": {
+        "jam3/no-sanitizer-with-danger": [
+          1,
+          {
+            "wrapperName": ["sanitizer"]
+          }
+        ]
+      }
     }   
   ))
   .pipe(eslint.formatEach())

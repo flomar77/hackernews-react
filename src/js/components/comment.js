@@ -27,10 +27,6 @@ function Comment(props) {
                 setLoading(false);
             });
         };
-        // if ( localStorage.getItem(id) !== null && localStorage.getItem(id).length > 0 ) {
-        //     setComment(JSON.parse(localStorage.getItem(id)));
-        // } else {
-        // }
         fetchData();
     }, [props.id]);
 
