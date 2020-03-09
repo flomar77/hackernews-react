@@ -75,7 +75,7 @@ function Stories(props) {
                         currentList.map((item) => { return( 
                             <article className={'story story-' + item}>
                                 <Story id={item} />
-                                <button className='readmore' onClick={(e)=>{ props.pageShown ? e.preventDefault() : showPage(item) }}>Read more...</button> 
+                                <button className='btn-readmore' onClick={(e)=>{ props.pageShown ? e.preventDefault() : showPage(item) }}>Read more...</button> 
                             </article>
                         )}) 
                         : 

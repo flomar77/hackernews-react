@@ -9,19 +9,41 @@ body {
     font-family: $ft-body;
     font-weight: 300;
 }
-#{h(1,6)}{
+h1, h2, h3, h4 , h5, h6{
     font-family: $ft-heading;
     margin-top: 0;
-    margin-bottom: $dist-m;  
+    margin-bottom: $dist-s;
+    @media screen and (min-width: 768px) {
+        margin-bottom: $dist-m;
+    }  
+}
+p, pre, code {
+    word-break: break-all; 
+    @media screen and (min-width: 768px) {
+        word-break: normal; 
+    }    
 }
 h1 {
-    font-size: 42px;
+    font-size: 32px;
     letter-spacing: 1px;
+    @media screen and (min-width: 768px) {
+        font-size: 42px;
+    }
 }
 h2 {
-    font-size: 26px; 
+    margin-top: 0;
+    font-size: 22px;
+    @media screen and (min-width: 768px) {
+        margin-top: $dist-s;
+        font-size: 28px;
+    } 
 }
 p {
     margin-top: 0;
     margin-bottom: $dist-s;
+}
+code {
+    display: inline-block;
+    max-width: 100%;
+    white-space: normal;
 }

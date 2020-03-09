@@ -1,12 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import * as timeago from 'timeago.js';
+import dompurify from 'dompurify';
 import { vars } from '../base/variables.js';
 import Comments from './comments.js';
 
 function Comment(props) {
     const id = props.id;
     const url = vars.hnewsAPI + 'item/' + id + '.json';
+    const sanitizer = dompurify.sanitize;
 
     let [ loading, setLoading ] = React.useState(true);
     let [ comment, setComment ] = React.useState({});
@@ -25,11 +27,11 @@ function Comment(props) {
                 setLoading(false);
             });
         };
-        if ( localStorage.getItem(id) !== null && localStorage.getItem(id).length > 0 ) {
-            setComment(JSON.parse(localStorage.getItem(id)));
-        } else {
-            fetchData();
-        }
+        // if ( localStorage.getItem(id) !== null && localStorage.getItem(id).length > 0 ) {
+        //     setComment(JSON.parse(localStorage.getItem(id)));
+        // } else {
+        // }
+        fetchData();
     }, [props.id]);
 
     const showComments = () => {
@@ -44,14 +46,13 @@ function Comment(props) {
         <div className="comment-content">
             <div className="comment-body">
                 <span className="comment-meta"><span className="comment-by">{comment.by}</span> wrote {timeago.format(comment.time * 1000)}:</span>
-                <p dangerouslySetInnerHTML={{ __html: comment.text }}></p>
+                <p dangerouslySetInnerHTML={{ __html: sanitizer(comment.text) }}></p>
             </div>
-            
             {
                 ( comment.kids && comment.kids.length > 0 )
                 ?
                 <div className={ showChildren ? "child-comments comments-open" : "child-comments comments-close"}>
-                    <button className="arrow" onClick={()=>showComments()}><span>More Comments</span></button>
+                    <button className="btn-show" onClick={()=>showComments()}><span>More Comments</span></button>
                     <Comments parent={id} />
                 </div>
                 :

@@ -16,7 +16,7 @@
 .stories-nav {
     position: absolute;
     width: auto;
-    right: 0;
+    right: $dist-m;
     top: $dist-s;
 }
 article {
@@ -27,9 +27,12 @@ article {
     transition: all 0.3s linear;
     margin-bottom: $dist-m;
     padding: $dist-m;
-    width: calc(50% - 20px);
+    width: calc(100% - 20px);
     margin: $dist-s 10px;
     padding-bottom: $dist-l;
+    @media screen and (min-width: 768px) {
+        width: calc(50% - 20px);
+    }
 }
 main.stories-unloaded article {
     @include liFromTo();
@@ -47,6 +50,8 @@ article {
         margin-bottom: $dist-s;
         a {
             color: $midgrey;
+            word-break: break-all;
+            hyphens: auto;
         }
     }
     .story-infos {
@@ -57,7 +62,7 @@ article {
     .story-id {
         font-size: $small;
     }
-    button.readmore {
+    .btn-readmore {
         display: block;
         position: absolute;
         bottom: $dist-m;

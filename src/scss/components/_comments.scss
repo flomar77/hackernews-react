@@ -19,19 +19,13 @@
     p:last-child {
         margin-bottom: 0;
     }
-} 
-.comment-meta {
-    display: block;
-    font-size: 0.9rem;
-    color: $darkgrey;
-    margin-bottom: $dist-s;
-    .comment-by {
-        font-weight: bold;
-    }
 }
 .child-comments {
     .comments {
         background-color: $white;
+        .comments {
+            background-color: rgba($lightergrey, 0.5);
+        }
     }
     &.comments-open > .comments{
         height: auto;
@@ -45,4 +39,16 @@
         overflow: hidden;
         transition: all 0.2s ease-out; 
     }
+} 
+.comment-meta {
+    display: block;
+    font-size: 0.9rem;
+    color: $darkgrey;
+    margin-bottom: $dist-s;
+    .comment-by {
+        font-weight: bold;
+    }
+}
+.no-comments {
+    padding: $dist-s $dist-l; 
 }

@@ -8,8 +8,6 @@ body {
     background-color: $lightergrey;
     font-size: $base-font-size;
     line-height: $base-line-height;
-    @media screen and (min-width: 768px) {
-    }
 }
 a {
     color: $dkyellow;
@@ -24,7 +22,13 @@ a {
     position: relative;
 }
 .container {
-    max-width: 1024px;
     margin: 0 auto;
+    padding: 0 $dist-m;
     position: relative;
+    @media screen and (min-width: 768px) {
+        max-width: 768px;
+    }
+    @media screen and (min-width: 1024px) {
+        max-width: 1024px;
+    }
 }

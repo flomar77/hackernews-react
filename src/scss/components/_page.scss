@@ -2,7 +2,7 @@
     position: fixed;
     top:0;
     left: 100%;
-    width: 90vw;
+    width: 85vw;
     height: 100%;
     overflow-y: scroll;
     z-index: 10;
@@ -10,15 +10,22 @@
     color: $black;
     opacity: 0.8;
     transition: all 0.3s ease-out 0.2s;
-    // padding: $rhythm * 3;
+
     .page-slide-in & {
-        left: 10vw;
+        left: 15vw;
         opacity: 1;
+    }
+    @media screen and (min-width: 768px) {
+        width: 90vw;
+        .page-slide-in & {
+            left: 10vw;
+        }
     }
     .page-header {
         background-color: $yellow;
         padding: $rhythm $dist-l;
         .story-url a {
+            word-break: break-all;
             color: $lila;
             &:hover {
                 color: $black;

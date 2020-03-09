@@ -23,9 +23,10 @@ function Comments(props) {
                     ?
                     commentsList.map((id)=>{ return ( <li key={id}><Comment id={id} /></li> ) })
                     :
-                    <p>No Comments</p>
+                    null
                 }
             </ul>
+            { (commentsList.length > 0) ? null : <p className="no-comments">No Comments</p> }
         </div>
     )    
 }

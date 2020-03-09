@@ -30,12 +30,10 @@ function Story(props) {
         // }
     }, [props.id])
     return (
-        <div className="story-content">
-            <span className="story-id">{id}</span>
-            
+        <div className="story-content">            
             <h2>{story.title}</h2>
-            <span className="story-url">URL: <a href={story.url} target="_blank">{story.url}</a></span>
-    <span className="story-infos">{story.score} points by {story.by} {timeago.format(story.time * 1000)} {story.kids ?  ' | ' + story.kids.length + ' Comments' : null }</span>
+            <span className="story-url">Link: <a href={story.url} target="_blank">{story.url}</a></span>
+            <span className="story-infos">{story.score} points by <span className="by">{story.by}</span> {timeago.format(story.time * 1000)} {story.kids ?  ' | ' + story.kids.length + ' Comments' : null }</span>
         </div>
     )    
 }
