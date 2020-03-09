@@ -19,8 +19,8 @@ function Story(props) {
             })
             .then(setLoading(false))
             .catch((err)=> {
-            console.log(err);
-            setLoading(false);
+                console.log(err);
+                setLoading(false);
             });
         };
         fetchData();

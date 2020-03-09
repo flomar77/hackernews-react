@@ -18,20 +18,18 @@ function Stories(props) {
         const fetchData = async () => {
             axios.get(url)
             .then(result => {
-                console.log(result.data);
                 const list = splitArrInChunks(result.data, storiesPerPage);
                 setStoriesList(list);
                 setCurrentStoriesList(list[position]);
             })
             .then(setLoading(false))
-            .then(console.log('fetched'))
             .catch((err)=> {
                 console.log(err);
                 setLoading(false);
             });
         };
         fetchData();
-        setTimeout(()=>{document.querySelector('.main').classList.add('stories-loaded')}, 350);
+        setTimeout(()=>{document.querySelector('.main').classList.add('stories-loaded')}, 400);
     }, []);
 
     const showPage = (item) => {
@@ -62,7 +60,7 @@ function Stories(props) {
             main.classList.remove('stories-unloaded');
         }, 550);
     }
-    console.log(storiesList);
+
     return (
         <div className='stories'>
             <div className='container'>

@@ -56,7 +56,6 @@ main.stories-loaded article {
     animation: appearLeft 250ms normal forwards ease-out;
 }
 article {
-    
     h2 {
         margin-bottom: $dist-s;  
     }
@@ -81,7 +80,6 @@ article {
         position: absolute;
         left: $dist-m;
         bottom: $dist-m;
-        // padding: 5px 7px;
         color: $lightgrey;
         font-size: $small;
         font-weight: bold;

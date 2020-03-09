@@ -38,7 +38,12 @@ function App(props) {
             <MainHeader />
             <Stories pageToShow={getPage} pageShown={showPage} />
             { showPage ? <Page id={pageID} /> : null }
-            <button className="btn-close" onClick={hidePage}><span>Close</span></button>
+            <button className="btn-close" onClick={hidePage}>
+                <span>Close</span>
+            </button>
+            <div class="loading-ellipsis">
+                <div></div><div></div><div></div><div></div>
+            </div>
         </main>
     )    
 }

@@ -2286,11 +2286,10 @@
 	  react.useEffect(() => {
 	    const fetchData = async () => {
 	      axios$1.get(url).then(result => {
-	        console.log(result.data);
 	        const list = splitArrInChunks(result.data, storiesPerPage);
 	        setStoriesList(list);
 	        setCurrentStoriesList(list[position]);
-	      }).then(setLoading(false)).then(console.log('fetched')).catch(err => {
+	      }).then(setLoading(false)).catch(err => {
 	        console.log(err);
 	        setLoading(false);
 	      });
@@ -2299,7 +2298,7 @@
 	    fetchData();
 	    setTimeout(() => {
 	      document.querySelector('.main').classList.add('stories-loaded');
-	    }, 350);
+	    }, 400);
 	  }, []);
 
 	  const showPage = item => {
@@ -2331,7 +2330,6 @@
 	    }, 550);
 	  };
 
-	  console.log(storiesList);
 	  return react.createElement("div", {
 	    className: "stories"
 	  }, react.createElement("div", {
@@ -3731,7 +3729,9 @@
 	  }) : null, react.createElement("button", {
 	    className: "btn-close",
 	    onClick: hidePage
-	  }, react.createElement("span", null, "Close")));
+	  }, react.createElement("span", null, "Close")), react.createElement("div", {
+	    class: "loading-ellipsis"
+	  }, react.createElement("div", null), react.createElement("div", null), react.createElement("div", null), react.createElement("div", null)));
 	}
 
 	reactDom.render(react.createElement(App, null), document.getElementById('root'));
