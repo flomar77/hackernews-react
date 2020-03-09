@@ -1,4 +1,4 @@
-# Hacker News App
+# Hacker News - App
 ## Single Page App made with React and SASS  
 based on the hacker-news Website https://news.ycombinator.com/   
 using the new hacker-news API https://github.com/HackerNews/API  
