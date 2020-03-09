@@ -10,14 +10,22 @@ function App(props) {
     let [ showPage, setShowPage ] = React.useState(false);
 
     React.useEffect(() => {
-    }, []);
+        if ( showPage ) {
+            document.querySelector('header').addEventListener('click', (e)=>{
+                let page = document.querySelector('.page');
+                if ( e.target !== page ) {
+                    hidePage();
+                }
+            });
+        }
+    });
 
     const getPage = (id) => {
         setPageID(id);
         setShowPage(true);
     }
 
-    const hidePage = () =>{
+    const hidePage = () => {
         document.querySelector('.main').classList.remove('page-slide-in');
         setTimeout(()=>{
             setPageID();

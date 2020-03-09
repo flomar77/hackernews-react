@@ -38,7 +38,7 @@ function Comment(props) {
                 ( comment.kids && comment.kids.length > 0 )
                 ?
                 <div className="child-comments">
-                    <span className="arrow">Show/Hide</span>
+                    <button className="arrow"><span>Show/Hide</span></button>
                     <Comments parent={id} />
                 </div>
                 :

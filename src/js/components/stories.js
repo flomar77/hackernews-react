@@ -14,7 +14,7 @@ function Stories(props) {
     let [ currentList, setCurrentStoriesList ] = React.useState([]);
     let [ loading, setLoading ] = React.useState(true);
 
-    React.useEffect((main) => {
+    React.useEffect(() => {
         const fetchData = async () => {
             axios.get(url)
             .then(result => {
@@ -33,9 +33,11 @@ function Stories(props) {
         setTimeout(()=>{document.querySelector('.main').classList.add('stories-loaded')}, 350);
     }, []);
 
-    function clickEvent(item) {
+    const showPage = (item) => {
         props.pageToShow(item);
-        setTimeout(()=>{main.classList.add('page-slide-in')}, 10);
+        setTimeout(()=> {
+            main.classList.add('page-slide-in');
+        }, 10);
     }
 
     const changeNav = (direction) => {
@@ -59,6 +61,7 @@ function Stories(props) {
             main.classList.remove('stories-unloaded');
         }, 550);
     }
+
     return (
         <div className='stories'>
             <div className='container'>
@@ -72,7 +75,7 @@ function Stories(props) {
                         currentList.map((item) => { return( 
                             <article className={'story story-' + item}>
                                 <Story id={item} />
-                                <button className='readmore' onClick={(e)=>{ props.pageShown ? e.preventDefault() : clickEvent(item) }}>Read more...</button> 
+                                <button className='readmore' onClick={(e)=>{ props.pageShown ? e.preventDefault() : showPage(item) }}>Read more...</button> 
                             </article>
                         )}) 
                         : 

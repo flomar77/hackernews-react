@@ -2115,7 +2115,7 @@
 	  let [storiesList, setStoriesList] = react.useState([]);
 	  let [currentList, setCurrentStoriesList] = react.useState([]);
 	  let [loading, setLoading] = react.useState(true);
-	  react.useEffect(main => {
+	  react.useEffect(() => {
 	    const fetchData = async () => {
 	      axios$1.get(url).then(result => {
 	        const list = splitArrInChunks(result.data, storiesPerPage);
@@ -2133,12 +2133,12 @@
 	    }, 350);
 	  }, []);
 
-	  function clickEvent(item) {
+	  const showPage = item => {
 	    props.pageToShow(item);
 	    setTimeout(() => {
 	      main.classList.add('page-slide-in');
 	    }, 10);
-	  }
+	  };
 
 	  const changeNav = direction => {
 	    if (direction === 'down' && position < storiesList.length - 1) {
@@ -2184,7 +2184,7 @@
 	    }), react.createElement("button", {
 	      className: "readmore",
 	      onClick: e => {
-	        props.pageShown ? e.preventDefault() : clickEvent(item);
+	        props.pageShown ? e.preventDefault() : showPage(item);
 	      }
 	    }, "Read more..."));
 	  }) : () => {
@@ -2223,9 +2223,9 @@
 	    }
 	  }), react.createElement("span", null, "By ", comment.by), comment.kids && comment.kids.length > 0 ? react.createElement("div", {
 	    className: "child-comments"
-	  }, react.createElement("span", {
+	  }, react.createElement("button", {
 	    className: "arrow"
-	  }, "Show/Hide"), react.createElement(Comments, {
+	  }, react.createElement("span", null, "Show/Hide")), react.createElement(Comments, {
 	    parent: id
 	  })) : null);
 	}
@@ -2275,7 +2275,17 @@
 	function App(props) {
 	  let [pageID, setPageID] = react.useState();
 	  let [showPage, setShowPage] = react.useState(false);
-	  react.useEffect(() => {}, []);
+	  react.useEffect(() => {
+	    if (showPage) {
+	      document.querySelector('header').addEventListener('click', e => {
+	        let page = document.querySelector('.page');
+
+	        if (e.target !== page) {
+	          hidePage();
+	        }
+	      });
+	    }
+	  });
 
 	  const getPage = id => {
 	    setPageID(id);
