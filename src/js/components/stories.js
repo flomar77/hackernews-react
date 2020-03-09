@@ -40,9 +40,9 @@ function Stories(props) {
     }
 
     const changeNav = (direction) => {
-        if ( direction === 'down' && position < storiesList.length - 1 ) {
+        if ( direction === 'next' && position < storiesList.length - 1 ) {
             changeNavActions(1);
-        } else if ( direction === 'up' && position > 0 ) {
+        } else if ( direction === 'prev' && position > 0 ) {
             changeNavActions(-1);
         }
     }
@@ -64,8 +64,8 @@ function Stories(props) {
     return (
         <div className='stories'>
             <div className='container'>
-                <button className="btn-up" onClick={()=>changeNav('up')}>Previous</button>
-                <button className="btn-down" onClick={()=>changeNav('down')}>Next</button>
+                <button className="btn-prev" onClick={()=>changeNav('prev')}>Previous</button>
+                <button className="btn-next" onClick={()=>changeNav('next')}>Next</button>
                 <div className="stories-nav">Page <span>{position + 1}</span> of {storiesList.length}</div>
                 <div className="stories-wrapper">
                     {
@@ -81,8 +81,8 @@ function Stories(props) {
                         ()=>{ return( <p>Loading...</p> ); }
                     }
                 </div>
-                <button className="btn-up" onClick={()=>changeNav('up')}>Previous</button>
-                <button className="btn-down" onClick={()=>changeNav('down')}>Next</button>
+                <button className="btn-prev" onClick={()=>changeNav('prev')}>Previous</button>
+                <button className="btn-next" onClick={()=>changeNav('next')}>Next</button>
             </div>
         </div>
     )    

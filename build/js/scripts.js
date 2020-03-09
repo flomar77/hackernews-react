@@ -2309,9 +2309,9 @@
 	  };
 
 	  const changeNav = direction => {
-	    if (direction === 'down' && position < storiesList.length - 1) {
+	    if (direction === 'next' && position < storiesList.length - 1) {
 	      changeNavActions(1);
-	    } else if (direction === 'up' && position > 0) {
+	    } else if (direction === 'prev' && position > 0) {
 	      changeNavActions(-1);
 	    }
 	  };
@@ -2335,11 +2335,11 @@
 	  }, react.createElement("div", {
 	    className: "container"
 	  }, react.createElement("button", {
-	    className: "btn-up",
-	    onClick: () => changeNav('up')
+	    className: "btn-prev",
+	    onClick: () => changeNav('prev')
 	  }, "Previous"), react.createElement("button", {
-	    className: "btn-down",
-	    onClick: () => changeNav('down')
+	    className: "btn-next",
+	    onClick: () => changeNav('next')
 	  }, "Next"), react.createElement("div", {
 	    className: "stories-nav"
 	  }, "Page ", react.createElement("span", null, position + 1), " of ", storiesList.length), react.createElement("div", {
@@ -2359,11 +2359,11 @@
 	  }) : () => {
 	    return react.createElement("p", null, "Loading...");
 	  }), react.createElement("button", {
-	    className: "btn-up",
-	    onClick: () => changeNav('up')
+	    className: "btn-prev",
+	    onClick: () => changeNav('prev')
 	  }, "Previous"), react.createElement("button", {
-	    className: "btn-down",
-	    onClick: () => changeNav('down')
+	    className: "btn-next",
+	    onClick: () => changeNav('next')
 	  }, "Next")));
 	}
 
