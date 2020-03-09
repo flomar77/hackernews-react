@@ -2076,7 +2076,6 @@
 	        unit += 's';
 	    return [diff + " " + unit + " ago", "in " + diff + " " + unit];
 	}
-	//# sourceMappingURL=en_US.js.map
 
 	var ZH_CN = ['秒', '分钟', '小时', '天', '周', '个月', '年'];
 	function zh_CN (diff, idx) {
@@ -2085,7 +2084,6 @@
 	    var unit = ZH_CN[~~(idx / 2)];
 	    return [diff + " " + unit + "\u524D", diff + " " + unit + "\u540E"];
 	}
-	//# sourceMappingURL=zh_CN.js.map
 
 	/**
 	 * Created by hustcc on 18/5/20.
@@ -2111,7 +2109,6 @@
 	var getLocale = function (locale) {
 	    return Locales[locale] || Locales['en_US'];
 	};
-	//# sourceMappingURL=register.js.map
 
 	/**
 	 * Created by hustcc on 18/5/20.
@@ -2207,7 +2204,6 @@
 	    var relDate = relativeDate ? toDate(relativeDate) : new Date();
 	    return (+relDate - +toDate(date)) / 1000;
 	}
-	//# sourceMappingURL=date.js.map
 
 	/**
 	 * format a TDate into string
@@ -2221,7 +2217,6 @@
 	    // format it with locale
 	    return formatDiff(sec, getLocale(locale));
 	};
-	//# sourceMappingURL=format.js.map
 
 	/**
 	 * Created by hustcc on 18/5/20.
@@ -2229,7 +2224,6 @@
 	 */
 	register('en_US', en_US);
 	register('zh_CN', zh_CN);
-	//# sourceMappingURL=index.js.map
 
 	function Story(props) {
 	  const id = props.id;
@@ -3587,7 +3581,7 @@
 	return purify;
 
 	})));
-	//# sourceMappingURL=purify.js.map
+
 	});
 
 	function Comment(props) {

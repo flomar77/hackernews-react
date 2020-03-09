@@ -18,6 +18,16 @@
     width: auto;
     right: $dist-m;
     top: $dist-s;
+    span {
+        display: inline-block;
+        background-color: rgba($midgrey, 0.1);
+        padding-left: 4px;
+        padding-right: 4px;
+        transition: background-color 0.2s linear;
+    }
+    .stories-unloaded & span {
+        background-color: rgba($yellow, 0.5);
+    }
 }
 article {
     opacity: 0;
