@@ -2237,6 +2237,12 @@
 	  const nr = props.nr;
 	  let [loading, setLoading] = react.useState(true);
 	  let [story, setStory] = react.useState({});
+
+	  const calcComments = kids => {
+	    let singPlur = kids.length > 1 ? ' Comments' : ' Comment';
+	    return ' | ' + kids.length + singPlur;
+	  };
+
 	  react.useEffect(() => {
 	    const fetchData = async () => {
 	      axios$1.get(url).then(result => {
@@ -2262,7 +2268,7 @@
 	    className: "story-infos"
 	  }, story.score, " points by ", react.createElement("span", {
 	    className: "by"
-	  }, story.by), " ", format(story.time * 1000), " ", story.kids ? ' | ' + story.kids.length + ' Comments' : null));
+	  }, story.by), " ", format(story.time * 1000), " ", story.kids ? calcComments(story.kids) : null));
 	}
 
 	const splitArrInChunks = (arr, chunk_size) => {

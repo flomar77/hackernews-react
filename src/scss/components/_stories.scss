@@ -66,6 +66,9 @@ article {
             word-break: break-all;
             hyphens: auto;
         }
+        a:hover {
+            color: $dklila;
+        }
     }
     .story-infos {
         display: block;
