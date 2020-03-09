@@ -30,7 +30,7 @@ function App(props) {
             <MainHeader />
             <Stories pageToShow={getPage} pageShown={showPage} />
             { showPage ? <Page id={pageID} /> : null }
-            <button className="close-btn" onClick={hidePage}>Close</button>
+            <button className="close-btn" onClick={hidePage}><span>Close</span></button>
         </main>
     )    
 }

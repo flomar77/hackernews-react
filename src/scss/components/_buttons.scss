@@ -18,3 +18,50 @@ button, .btn {
     margin-top: -8px;
     z-index: 8;
 }
+.close-btn {
+    background: none;
+    border: 0;
+    position: absolute;
+    display: block;
+    height: 40px;
+    width: 40px;
+    top: $dist-m;
+    left: $dist-m;
+    &:hover {
+        background-color: transparent;
+        span:after {
+            transform: rotate(180deg);
+            
+        }
+        span:before {
+            transform: rotate(-180deg);
+        }    
+    }
+    span {
+      display: block;
+      position: absolute;
+      text-indent: -999px;
+      top: 50%;
+      left: 50%;
+      height: 40px;
+      width: 40px;
+      overflow: hidden;
+      transform: translate(-50%, -50%);
+      &:before, &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 14px;
+        height: 2px;
+        width: 40px;
+        border-radius: 3px;
+        border: 1px solid $yellow;
+        background: $yellow;
+        transform: rotate(135deg);
+        transition: transform .2s linear;
+      }
+      &:before {
+        transform: rotate(-135deg);
+      }
+    }
+}

@@ -2300,7 +2300,7 @@
 	  }) : null, react.createElement("button", {
 	    className: "close-btn",
 	    onClick: hidePage
-	  }, "Close"));
+	  }, react.createElement("span", null, "Close")));
 	}
 
 	reactDom.render(react.createElement(App, null), document.getElementById('root'));
