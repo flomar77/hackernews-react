@@ -53,8 +53,8 @@ function buildStyles() {
     .pipe(sourcemaps.init())
     .pipe(sass())
     .pipe(postcss(postcssPlugins))
+    .pipe(sourcemaps.write('../../src/sourcemaps'))
     .pipe(dest(buildDir + 'css/'))
-    .pipe(sourcemaps.write('../src/sourcemaps'))
     .pipe(browsersync.reload({ stream: true }));
 }
 // Build Scripts
@@ -119,7 +119,7 @@ function buildScripts() {
   })
   )
   .pipe(dest(buildDir + '/js/'))
-  .pipe(sourcemaps.write('../src/sourcemaps'))
+  .pipe(sourcemaps.write('../sourcemaps'))
   .pipe(minify({
     ext:{
       min:'.min.js'
