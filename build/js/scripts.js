@@ -2076,6 +2076,7 @@
 	        unit += 's';
 	    return [diff + " " + unit + " ago", "in " + diff + " " + unit];
 	}
+	//# sourceMappingURL=en_US.js.map
 
 	var ZH_CN = ['秒', '分钟', '小时', '天', '周', '个月', '年'];
 	function zh_CN (diff, idx) {
@@ -2084,6 +2085,7 @@
 	    var unit = ZH_CN[~~(idx / 2)];
 	    return [diff + " " + unit + "\u524D", diff + " " + unit + "\u540E"];
 	}
+	//# sourceMappingURL=zh_CN.js.map
 
 	/**
 	 * Created by hustcc on 18/5/20.
@@ -2109,6 +2111,7 @@
 	var getLocale = function (locale) {
 	    return Locales[locale] || Locales['en_US'];
 	};
+	//# sourceMappingURL=register.js.map
 
 	/**
 	 * Created by hustcc on 18/5/20.
@@ -2204,6 +2207,7 @@
 	    var relDate = relativeDate ? toDate(relativeDate) : new Date();
 	    return (+relDate - +toDate(date)) / 1000;
 	}
+	//# sourceMappingURL=date.js.map
 
 	/**
 	 * format a TDate into string
@@ -2217,6 +2221,7 @@
 	    // format it with locale
 	    return formatDiff(sec, getLocale(locale));
 	};
+	//# sourceMappingURL=format.js.map
 
 	/**
 	 * Created by hustcc on 18/5/20.
@@ -2224,31 +2229,31 @@
 	 */
 	register('en_US', en_US);
 	register('zh_CN', zh_CN);
+	//# sourceMappingURL=index.js.map
 
 	function Story(props) {
 	  const id = props.id;
 	  const url = vars.hnewsAPI + 'item/' + id + '.json';
+	  const nr = props.nr;
 	  let [loading, setLoading] = react.useState(true);
 	  let [story, setStory] = react.useState({});
 	  react.useEffect(() => {
 	    const fetchData = async () => {
 	      axios$1.get(url).then(result => {
-	        localStorage.setItem(id, JSON.stringify(result.data));
 	        setStory(result.data);
 	      }).then(setLoading(false)).catch(err => {
 	        console.log(err);
 	        setLoading(false);
 	      });
-	    }; // if ( localStorage.getItem(id) !== null && localStorage.getItem(id).length > 0 ) {
-	    //     setStory(JSON.parse(localStorage.getItem(id)));
-	    // } else {
+	    };
 
-
-	    fetchData(); // }
+	    fetchData();
 	  }, [props.id]);
 	  return react.createElement("div", {
 	    className: "story-content"
-	  }, react.createElement("h2", null, story.title), react.createElement("span", {
+	  }, react.createElement("span", {
+	    className: "story-index"
+	  }, nr), react.createElement("h2", null, story.title), react.createElement("span", {
 	    className: "story-url"
 	  }, "Link: ", react.createElement("a", {
 	    href: story.url,
@@ -2281,6 +2286,7 @@
 	  react.useEffect(() => {
 	    const fetchData = async () => {
 	      axios$1.get(url).then(result => {
+	        console.log(result.data);
 	        const list = splitArrInChunks(result.data, storiesPerPage);
 	        setStoriesList(list);
 	        setCurrentStoriesList(list[position]);
@@ -2325,6 +2331,7 @@
 	    }, 550);
 	  };
 
+	  console.log(storiesList);
 	  return react.createElement("div", {
 	    className: "stories"
 	  }, react.createElement("div", {
@@ -2332,18 +2339,19 @@
 	  }, react.createElement("button", {
 	    className: "btn-up",
 	    onClick: () => changeNav('up')
-	  }, "Up"), react.createElement("button", {
+	  }, "Previous"), react.createElement("button", {
 	    className: "btn-down",
 	    onClick: () => changeNav('down')
-	  }, "Down"), react.createElement("div", {
+	  }, "Next"), react.createElement("div", {
 	    className: "stories-nav"
 	  }, "Page ", react.createElement("span", null, position + 1), " of ", storiesList.length), react.createElement("div", {
 	    className: "stories-wrapper"
-	  }, !loading ? currentList.map(item => {
+	  }, !loading ? currentList.map((item, index) => {
 	    return react.createElement("article", {
 	      className: 'story story-' + item
 	    }, react.createElement(Story, {
-	      id: item
+	      id: item,
+	      nr: position * 20 + index + 1
 	    }), react.createElement("button", {
 	      className: "btn-readmore",
 	      onClick: e => {
@@ -2352,7 +2360,13 @@
 	    }, "Read more..."));
 	  }) : () => {
 	    return react.createElement("p", null, "Loading...");
-	  })));
+	  }), react.createElement("button", {
+	    className: "btn-up",
+	    onClick: () => changeNav('up')
+	  }, "Previous"), react.createElement("button", {
+	    className: "btn-down",
+	    onClick: () => changeNav('down')
+	  }, "Next")));
 	}
 
 	var purify = createCommonjsModule(function (module, exports) {
@@ -3581,7 +3595,7 @@
 	return purify;
 
 	})));
-
+	//# sourceMappingURL=purify.js.map
 	});
 
 	function Comment(props) {

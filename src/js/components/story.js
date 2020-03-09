@@ -6,6 +6,7 @@ import { vars } from '../base/variables.js';
 function Story(props) {
     const id = props.id;
     const url = vars.hnewsAPI + 'item/' + id + '.json';
+    const nr = props.nr;
 
     let [ loading, setLoading ] = React.useState(true);
     let [ story, setStory ] = React.useState({});
@@ -14,7 +15,6 @@ function Story(props) {
         const fetchData = async () => {
             axios.get(url)
             .then(result => {
-                localStorage.setItem(id, JSON.stringify(result.data));
                 setStory(result.data);
             })
             .then(setLoading(false))
@@ -23,14 +23,11 @@ function Story(props) {
             setLoading(false);
             });
         };
-        // if ( localStorage.getItem(id) !== null && localStorage.getItem(id).length > 0 ) {
-        //     setStory(JSON.parse(localStorage.getItem(id)));
-        // } else {
         fetchData();
-        // }
     }, [props.id])
     return (
-        <div className="story-content">            
+        <div className="story-content">
+            <span className="story-index">{nr}</span>            
             <h2>{story.title}</h2>
             <span className="story-url">Link: <a href={story.url} target="_blank">{story.url}</a></span>
             <span className="story-infos">{story.score} points by <span className="by">{story.by}</span> {timeago.format(story.time * 1000)} {story.kids ?  ' | ' + story.kids.length + ' Comments' : null }</span>

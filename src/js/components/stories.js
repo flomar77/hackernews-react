@@ -18,7 +18,8 @@ function Stories(props) {
         const fetchData = async () => {
             axios.get(url)
             .then(result => {
-                const list = splitArrInChunks(result.data, storiesPerPage)
+                console.log(result.data);
+                const list = splitArrInChunks(result.data, storiesPerPage);
                 setStoriesList(list);
                 setCurrentStoriesList(list[position]);
             })
@@ -61,20 +62,20 @@ function Stories(props) {
             main.classList.remove('stories-unloaded');
         }, 550);
     }
-
+    console.log(storiesList);
     return (
         <div className='stories'>
             <div className='container'>
-                <button className="btn-up" onClick={()=>changeNav('up')}>Up</button>
-                <button className="btn-down" onClick={()=>changeNav('down')}>Down</button>
+                <button className="btn-up" onClick={()=>changeNav('up')}>Previous</button>
+                <button className="btn-down" onClick={()=>changeNav('down')}>Next</button>
                 <div className="stories-nav">Page <span>{position + 1}</span> of {storiesList.length}</div>
                 <div className="stories-wrapper">
                     {
                         !loading
                         ? 
-                        currentList.map((item) => { return( 
+                        currentList.map((item, index) => { return( 
                             <article className={'story story-' + item}>
-                                <Story id={item} />
+                                <Story id={item} nr={( position * 20) + index + 1 }/>
                                 <button className='btn-readmore' onClick={(e)=>{ props.pageShown ? e.preventDefault() : showPage(item) }}>Read more...</button> 
                             </article>
                         )}) 
@@ -82,6 +83,8 @@ function Stories(props) {
                         ()=>{ return( <p>Loading...</p> ); }
                     }
                 </div>
+                <button className="btn-up" onClick={()=>changeNav('up')}>Previous</button>
+                <button className="btn-down" onClick={()=>changeNav('down')}>Next</button>
             </div>
         </div>
     )    
