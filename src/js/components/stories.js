@@ -71,12 +71,13 @@ function Stories(props) {
                     {
                         !loading
                         ? 
-                        currentList.map((item, index) => { return( 
+                        currentList.map((item, index) => { return ( 
                             <article className={'story story-' + item}>
                                 <Story id={item} nr={( position * 20) + index + 1 }/>
                                 <button className='btn-readmore' onClick={(e)=>{ props.pageShown ? e.preventDefault() : showPage(item) }}>Read more...</button> 
                             </article>
-                        )}) 
+                            )
+                        }) 
                         : 
                         ()=>{ return( <p>Loading...</p> ); }
                     }

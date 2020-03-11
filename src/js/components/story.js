@@ -11,8 +11,8 @@ function Story(props) {
     let [ loading, setLoading ] = React.useState(true);
     let [ story, setStory ] = React.useState({});
 
-    const calcComments = (kids) => {
-        let singPlur = ( kids.length > 1) ? ' Comments' : ' Comment';
+    const printComments = (kids) => {
+        let singPlur = ( kids.length > 1) ? ' main Comments' : ' main Comment';
         return ' | ' + kids.length + singPlur;
     }
 
@@ -36,7 +36,7 @@ function Story(props) {
             <span className="story-index">{nr}</span>            
             <h2>{story.title}</h2>
             <span className="story-url">Link: <a href={story.url} target="_blank">{story.url}</a></span>
-            <span className="story-infos">{story.score} points by <span className="by">{story.by}</span> {timeago.format(story.time * 1000)} {story.kids ? calcComments(story.kids) : null }</span>
+            <span className="story-infos">{story.score} points by <span className="by">{story.by}</span> {timeago.format(story.time * 1000)} {story.kids ? printComments(story.kids) : null }</span>
         </div>
     )    
 }

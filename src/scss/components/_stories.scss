@@ -1,11 +1,11 @@
 .stories {
+    padding-bottom: $dist-l;
     .page-slide-in & {
         height: 100vh;
         overflow: hidden;
         position: absolute;
         z-index: 6;
     }
-    padding-bottom: $dist-l;
 }
 .stories-wrapper {
     position: relative;

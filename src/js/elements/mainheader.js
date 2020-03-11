@@ -1,10 +1,6 @@
 import React from 'react';
 
-function MainHeader(props) {
-
-    React.useEffect(() => {
-    }, []);
-
+function MainHeader() {
     return (
         <header className="main-header">
             <div className="container">

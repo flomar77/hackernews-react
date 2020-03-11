@@ -625,17 +625,7 @@
 	}
 	});
 
-	////////////////////////////////////////////////
-	// Define main variables for project
-	////////////////////////////////////////////////
-	const vars = {};
-	vars.location = window.location;
-	vars.url = window.location.href;
-	vars.body = document.querySelector('body');
-	vars.hnewsAPI = 'https://hacker-news.firebaseio.com/v0/';
-
-	function MainHeader(props) {
-	  react.useEffect(() => {}, []);
+	function MainHeader() {
 	  return react.createElement("header", {
 	    className: "main-header"
 	  }, react.createElement("div", {
@@ -2231,6 +2221,15 @@
 	register('zh_CN', zh_CN);
 	//# sourceMappingURL=index.js.map
 
+	////////////////////////////////////////////////
+	// Define main variables for project
+	////////////////////////////////////////////////
+	const vars = {};
+	vars.location = window.location;
+	vars.url = window.location.href;
+	vars.body = document.querySelector('body');
+	vars.hnewsAPI = 'https://hacker-news.firebaseio.com/v0/';
+
 	function Story(props) {
 	  const id = props.id;
 	  const url = vars.hnewsAPI + 'item/' + id + '.json';
@@ -2238,8 +2237,8 @@
 	  let [loading, setLoading] = react.useState(true);
 	  let [story, setStory] = react.useState({});
 
-	  const calcComments = kids => {
-	    let singPlur = kids.length > 1 ? ' Comments' : ' Comment';
+	  const printComments = kids => {
+	    let singPlur = kids.length > 1 ? ' main Comments' : ' main Comment';
 	    return ' | ' + kids.length + singPlur;
 	  };
 
@@ -2268,7 +2267,7 @@
 	    className: "story-infos"
 	  }, story.score, " points by ", react.createElement("span", {
 	    className: "by"
-	  }, story.by), " ", format(story.time * 1000), " ", story.kids ? calcComments(story.kids) : null));
+	  }, story.by), " ", format(story.time * 1000), " ", story.kids ? printComments(story.kids) : null));
 	}
 
 	const splitArrInChunks = (arr, chunk_size) => {
@@ -3694,9 +3693,7 @@
 	}
 
 	function Page(props) {
-	  let [hideClass, setHideClass] = react.useState(false);
-	  react.useEffect(() => {}, []);
-
+	  let [commentsCount, setCommentsCount] = react.useState(0);
 	  return react.createElement("div", {
 	    className: "page",
 	    id: props.id
@@ -3706,7 +3703,7 @@
 	    id: props.id
 	  })), react.createElement("div", {
 	    className: "page-content"
-	  }, react.createElement("h3", null, "Comments"), react.createElement(Comments, {
+	  }, react.createElement("h3", null, commentsCount > 0 ? commentsCount : null, " Comments"), react.createElement(Comments, {
 	    parent: props.id
 	  })));
 	}

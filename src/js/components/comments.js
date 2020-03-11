@@ -6,7 +6,6 @@ import Comment from './comment.js';
 function Comments(props) {
     const pid = props.parent;
     const url = vars.hnewsAPI + 'item/' + pid + '.json';
-    let localItem = {};
 
     let [ commentsList, setCommentsList ] = React.useState([]);
     let [ loading, setLoading ] = React.useState(true);
@@ -43,7 +42,9 @@ function Comments(props) {
                 {
                     (commentsList.length > 0)
                     ?
-                    commentsList.map((id)=>{ return ( <li key={id}><Comment id={id} /></li> ) })
+                    commentsList.map((id)=>{
+                        return ( <li key={id}><Comment id={id} /></li> ) 
+                    })
                     :
                     null
                 }
