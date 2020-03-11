@@ -29,7 +29,7 @@ function Comments(props) {
             })
             .then(setLoading(false))
             .catch((err)=> {
-                console.log(err);
+                // console.log(err);
                 setLoading(false);
             });
         };
