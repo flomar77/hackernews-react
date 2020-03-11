@@ -13,11 +13,16 @@
     .child-comments ul {
         padding: 0;
         > li {
-            padding: $dist-s $dist-m; 
+            padding: $dist-s 10px; 
         }
     }
     p:last-child {
         margin-bottom: 0;
+    }
+    @media screen and (min-width: 768px) {
+        .child-comments ul > li {
+            padding: $dist-s $dist-m; 
+        }
     }
 }
 .child-comments {
