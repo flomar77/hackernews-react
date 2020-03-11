@@ -625,7 +625,7 @@
 	}
 	});
 
-	function MainHeader() {
+	function MainHeader(props) {
 	  return react.createElement("header", {
 	    className: "main-header"
 	  }, react.createElement("div", {

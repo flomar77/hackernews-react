@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MainHeader() {
+function MainHeader(props) {
     return (
         <header className="main-header">
             <div className="container">
