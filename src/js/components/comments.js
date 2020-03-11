@@ -23,7 +23,7 @@ function Comments(props) {
         const fetchData = async () => {
             axios.get(url)
             .then(result => {
-                if (result.data.kids.length > 0) {
+                if (result.data.kids && result.data.kids.length > 0) {
                     setCommentsList(result.data.kids);
                 }
             })

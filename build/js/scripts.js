@@ -3632,7 +3632,7 @@
 
 	  return react.createElement("div", {
 	    className: "comment-content"
-	  }, react.createElement("div", {
+	  }, !loading ? react.createElement("div", {
 	    className: "comment-body"
 	  }, react.createElement("span", {
 	    className: "comment-meta"
@@ -3642,7 +3642,7 @@
 	    dangerouslySetInnerHTML: {
 	      __html: sanitizer(comment.text)
 	    }
-	  })), comment.kids && comment.kids.length > 0 ? react.createElement("div", {
+	  })) : react.createElement("p", null, "Loading..."), comment.kids && comment.kids.length > 0 ? react.createElement("div", {
 	    className: showChildren ? "child-comments comments-open" : "child-comments comments-close"
 	  }, react.createElement("button", {
 	    className: "btn-show",
@@ -3668,7 +3668,7 @@
 	  react.useEffect(() => {
 	    const fetchData = async () => {
 	      axios$1.get(url).then(result => {
-	        if (result.data.kids.length > 0) {
+	        if (result.data.kids && result.data.kids.length > 0) {
 	          setCommentsList(result.data.kids);
 	        }
 	      }).then(setLoading(false)).catch(err => {

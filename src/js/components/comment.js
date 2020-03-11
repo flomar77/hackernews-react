@@ -40,10 +40,16 @@ function Comment(props) {
 
     return (
         <div className="comment-content">
-            <div className="comment-body">
-                <span className="comment-meta"><span className="comment-by">{comment.by}</span> wrote {timeago.format(comment.time * 1000)}:</span>
-                <p dangerouslySetInnerHTML={{ __html: sanitizer(comment.text) }}></p>
-            </div>
+            {
+                ( !loading )
+                ?
+                <div className="comment-body">
+                    <span className="comment-meta"><span className="comment-by">{comment.by}</span> wrote {timeago.format(comment.time * 1000)}:</span>
+                    <p dangerouslySetInnerHTML={{ __html: sanitizer(comment.text) }}></p>
+                </div>
+                :
+                <p>Loading...</p>
+            }
             {
                 ( comment.kids && comment.kids.length > 0 )
                 ?
